@@ -1,5 +1,6 @@
 {
 	"name": "cue-wasm",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "devDependencies": {
     "jest": "^28.1.1"
