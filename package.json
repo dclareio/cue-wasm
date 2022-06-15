@@ -1,0 +1,11 @@
+{
+	"name": "cue-wasm",
+  "main": "lib/index.js",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  },
+  "scripts": {
+    "build:wasm": "DOCKER_BUILDKIT=1  docker build -o lib -f Dockerfile .",
+    "test": "jest"
+  }
+}
