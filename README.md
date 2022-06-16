@@ -118,6 +118,7 @@ cue.parse('hello: "world"')  // returns { hello: "world" }
 
 * [x] CUE -> JSON/JS
 * [ ] JSON/JS -> CUE
+* [ ] Use [TinyGo](https://tinygo.org/) to slim down wasm further (compat issue with encoding/gob)
 * [ ] JSONSchema -> CUE
 * [ ] CUE -> JSONSchema
 * [ ] Typescripe Types -> CUE
