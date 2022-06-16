@@ -154,7 +154,7 @@ Distributed under the MIT License. See LICENSE for more information.
 <!-- Contact -->
 ## :handshake: Contact
 
-[@dclario](https://twitter.com/dclareio) - contact@dclare.io - **We do consulting!!**
+[@dclario](https://twitter.com/dclareio) - https://dclare.io - contact@dclare.io - **We do consulting!!**
 
 Project Link: [https://github.com/dclareio/cue-wasm](https://github.com/dclareio/cue-wasm)
 
