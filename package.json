@@ -1,12 +1,23 @@
 {
-	"name": "cue-wasm",
-  "version": "0.0.1",
-  "main": "lib/index.js",
-  "devDependencies": {
-    "jest": "^28.1.1"
+  "name": "foo",
+  "type": "module",
+  "source": "lib/index.js",
+  "exports": {
+    "require": "./dist/cue-wasm.cjs",
+    "default": "./dist/cue-wasm.modern.js"
   },
+  "main": "./dist/cue-wasm.cjs",
+  "module": "./dist/cue-wasm.module.js",
+  "unpkg": "./dist/cue-wasm.umd.js",
   "scripts": {
-    "build:wasm": "DOCKER_BUILDKIT=1  docker build -o lib -f Dockerfile .",
+    "build": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
+    "dev": "microbundle watch",
     "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^28.1.1",
+    "microbundle": "^0.15.0",
+    "pako": "^2.0.4",
+    "zlib": "^1.0.5"
   }
 }

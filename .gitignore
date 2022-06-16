@@ -1,3 +1,5 @@
 *.wasm
+*.wasm.inline.js
+dist
 wasm_exec.js
 node_modules

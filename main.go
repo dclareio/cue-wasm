@@ -11,8 +11,8 @@ import (
 
 
 func main() {
-	api := js.Global().Get("WasmAPI")
-	api.Set("toJSON", js.FuncOf(toJSON))
+	api := js.Global().Get("CueWasmAPI")
+	api.Set("toJSONImpl", js.FuncOf(toJSON))
 	<-make(chan bool)
 }
 
