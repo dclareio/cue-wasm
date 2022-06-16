@@ -147,7 +147,7 @@ Please read the [Code of Conduct](https://github.com/dclareio/cue-wasm/blob/mast
 <!-- License -->
 ## :warning: License
 
-Distributed under the no License. See LICENSE for more information.
+Distributed under the MIT License. See LICENSE for more information.
 
 
 <!-- Contact -->
