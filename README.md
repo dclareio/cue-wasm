@@ -1,10 +1,9 @@
 <div align="center">
 
-  <img src="assets/logo.png" alt="logo" width="200" height="auto" />
   <h1>Cue Wasm</h1>
 
   <p>
-    Wasm bindings for cue. Works with node 16+ and modern browsers thanks to [microbundle](https://github.com/developit/microbundle)
+    Wasm bindings for cue. Works with node 16+ and modern browsers thanks to <a href="https://github.com/developit/microbundle">microbundle</a>
   </p>
 
 
