@@ -67,7 +67,7 @@
 
 ### :gear: Installation
 
-Install my-project with npm
+Install cue-wasm with yarn
 
 ```bash
   yarn add cue-wasm
