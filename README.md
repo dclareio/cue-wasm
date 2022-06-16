@@ -30,8 +30,6 @@
 </p>
 
 <h4>
-    <a href="https://github.com/dclareio/cue-wasm/">View Demo</a>
-  <span> · </span>
     <a href="https://github.com/dclareio/cue-wasm">Documentation</a>
   <span> · </span>
     <a href="https://github.com/dclareio/cue-wasm/issues/">Report Bug</a>
@@ -105,9 +103,6 @@ Build the library (requires docker)
 
 <!-- Usage -->
 ## :eyes: Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
 
 ```javascript
 import CUE from 'cue-wasm'
