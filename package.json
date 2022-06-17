@@ -2,6 +2,7 @@
   "name": "cue-wasm",
   "version": "0.0.7",
   "type": "module",
+  "source": "lib/index.js",
   "exports": {
     "require": "./dist/cue-wasm.cjs",
     "default": "./dist/cue-wasm.modern.js"
