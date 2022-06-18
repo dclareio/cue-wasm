@@ -122,10 +122,11 @@ const obj = cue`
 `; // returns { test: "test", key: "val" }
 
 // note that for strings you'll need to quote them manually if you
-// don't want cue to interpret them literally, eg.
+// don't want cue to interpret them literally. This allows dynamically
+// writing cue e.g.
 
 cue`test: ${"test"}` // evaluates `test: test` vs.
-cue `test: "${"test"}"` // evaluates `test: "test"`
+cue`test: "${"test"}"` // evaluates `test: "test"`
 ```
 
 <!-- Roadmap -->
