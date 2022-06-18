@@ -120,6 +120,12 @@ const obj = cue`
   test: string
   ${mergeObj}
 `; // returns { test: "test", key: "val" }
+
+// note that for strings you'll need to quote them manually if you
+// don't want cue to interpret them literally, eg.
+
+cue`test: ${"test"}` // evaluates `test: test` vs.
+cue `test: "${"test"}"` // evaluates `test: "test"`
 ```
 
 <!-- Roadmap -->

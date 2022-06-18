@@ -37,7 +37,7 @@ test('parses cue tagged with string interpolation to js object', async () => {
   const cue = await CUE.init();
   const result = cue`
     tagged: string
-    tagged: ${"test"}
+    tagged: "${"test"}"
   `;
   expect(result).toEqual({ tagged: "test" });
 });
