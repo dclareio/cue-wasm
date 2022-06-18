@@ -110,7 +110,16 @@ import CUE from 'cue-wasm'
 // inititalize the wasm bindings to use cue
 const cue = await CUE.init();
 
+// basic API
 cue.parse('hello: "world"')  // returns { hello: "world" }
+
+// Tagged template literals
+const mergeObj = { test: "test" }
+const obj = cue`
+  key: "val"
+  test: string
+  ${mergeObj}
+`; // returns { test: "test", key: "val" }
 ```
 
 <!-- Roadmap -->
