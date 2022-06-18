@@ -4,21 +4,21 @@
 package main
 
 import (
-	"syscall/js"
+	// "syscall/js"
 
 	"cuelang.org/go/cue/cuecontext"
 )
 
 
 func main() {
-	api := js.Global().Get("CueWasmAPI")
-	api.Set("toJSONImpl", js.FuncOf(toJSON))
-	<-make(chan bool)
+	// api := js.Global().Get("CueWasmAPI")
+	// api.Set("toJSONImpl", js.FuncOf(toJSON))
+	// <-make(chan bool)
 }
 
-func toJSON(this js.Value, args []js.Value) interface{} {
+func toJSON(cueString string) interface{} {
 	ctx := cuecontext.New()
-	value := ctx.CompileString(args[0].String())
+	value := ctx.CompileString(cueString)
 
 	err:= value.Err()
 	if err != nil {
