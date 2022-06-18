@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "jest": "^28.1.1",
+    "lodash.isstring": "^4.0.1",
     "microbundle": "^0.15.0",
     "pako": "^2.0.4",
     "zlib": "^1.0.5"
