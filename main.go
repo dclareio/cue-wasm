@@ -13,8 +13,7 @@ import (
 func main() {
 	api := js.Global().Get("CueWasmAPI")
 	api.Set("toJSONImpl", js.FuncOf(toJSON))
-	select {}
-	// <-make(chan bool)
+	<-make(chan bool)
 }
 
 func toJSON(this js.Value, args []js.Value) interface{} {

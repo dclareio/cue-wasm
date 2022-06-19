@@ -62,6 +62,7 @@
 
 - Cue to json `cue.toJSON()`
 - Cue to js object `cue.parse()`
+- Highly optimized - 1.9MB bundle size
 
 ## 	:toolbox: Getting Started
 
@@ -134,7 +135,7 @@ cue`test: "${"test"}"` // evaluates `test: "test"`
 
 * [x] CUE -> JSON/JS
 * [ ] JSON/JS -> CUE
-* [x] Use [TinyGo](https://tinygo.org/) to slim down wasm further
+* [x] Use [TinyGo](https://tinygo.org/) to slim down wasm further (currently a bit of a hack, but works well!)
 * [ ] JSONSchema -> CUE
 * [ ] CUE -> JSONSchema
 * [ ] Typescripe Types -> CUE
