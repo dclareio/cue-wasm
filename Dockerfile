@@ -9,6 +9,7 @@ RUN GOOS=js GOARCH=wasm go install
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg/encoding/json"||g' {} \;
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg/encoding/yaml"||g' {} \;
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg/tool.*"||g' {} \;
+# gob encoding not supported by tinygo :( so stub out with json where applicable
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|gob|json|g' {} \;
 
 FROM tinygo/tinygo:0.23.0 AS build-go
@@ -41,8 +42,7 @@ FROM scratch
 
 COPY --from=build-node /src/dist /
 
-
-
+# TODO: provide "full" build along with slim
 # FROM docker.io/golang:1.18-alpine AS build-go
 
 # WORKDIR /src
