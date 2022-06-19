@@ -46,7 +46,7 @@ RUN yarn install --frozen-lockfile
 RUN npx microbundle -f cjs,esm
 
 # redact wasm from sourcemaps, no need to bundle twice
-# RUN find /src/dist/*.map -type f -exec sed -i -e 's|export default \\\".*\\\"|export default \\\"<cue-wasm-redacted>\\\"|g' {} \;
+RUN find /src/dist/cue.wasm.*.map -type f -exec sed -i -e 's|export default \\\".*\\\"|export default \\\"<cue-wasm-redacted>\\\"|g' {} \;
 
 FROM scratch
 

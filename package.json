@@ -10,7 +10,7 @@
   "main": "./dist/cue-wasm-[name].cjs",
   "module": "./dist/cue-wasm-[name].module.js",
   "scripts": {
-    "build": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
+    "build": "rm -rf dist/; DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
     "test": "jest"
   },
   "devDependencies": {
