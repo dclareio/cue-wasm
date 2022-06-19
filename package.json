@@ -4,12 +4,11 @@
   "type": "module",
   "source": "lib/index.js",
   "exports": {
-    "require": "./dist/cue-wasm.cjs",
-    "default": "./dist/cue-wasm.modern.js"
+    "require": "./dist/cue-wasm-[name].cjs",
+    "default": "./dist/cue-wasm-[name].modern.js"
   },
-  "main": "./dist/cue-wasm.cjs",
-  "module": "./dist/cue-wasm.module.js",
-  "unpkg": "./dist/cue-wasm.umd.js",
+  "main": "./dist/cue-wasm-[name].cjs",
+  "module": "./dist/cue-wasm-[name].module.js",
   "scripts": {
     "build": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
     "build:tinygo": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile.tinygo .",
