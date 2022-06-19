@@ -54,8 +54,9 @@ COPY --from=build-go /src/lib/cue.wasm.inline.js /src/lib/
 RUN yarn install --frozen-lockfile
 RUN npx microbundle
 
+# redact wasm from sourcemaps, no need to bundle twice
+RUN find /src/dist/*.map -type f -exec sed -i -e 's|export default \\\".*\\\"|export default \\\"<cue-wasm-redacted>\\\"|' {} \;
+
 FROM scratch
 
 COPY --from=build-node /src/dist /
-
-
