@@ -12,6 +12,7 @@
   "unpkg": "./dist/cue-wasm.umd.js",
   "scripts": {
     "build": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
+    "build:full": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile.full .",
     "test": "jest"
   },
   "devDependencies": {
@@ -19,7 +20,6 @@
     "lodash.isstring": "^4.0.1",
     "microbundle": "^0.15.0",
     "pako": "^2.0.4",
-    "polyfill-crypto.getrandomvalues": "^1.0.0",
-    "zlib": "^1.0.5"
+    "polyfill-crypto.getrandomvalues": "^1.0.0"
   }
 }
