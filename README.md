@@ -109,7 +109,11 @@ Build the library (requires docker)
 import CUE from 'cue-wasm'
 
 // inititalize the wasm bindings to use cue
-const cue = await CUE.init();
+// can optionally pass a variant, by default will load:
+// "full" variant compiled with standard go compiler
+// "slim" variant compiled with tinygo compiler (smaller,
+// but with some known limitations, mainly relating to error messages)
+const cue = await CUE.init("full" | "slim");
 
 // basic API
 cue.parse('hello: "world"')  // returns { hello: "world" }
