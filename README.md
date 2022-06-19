@@ -62,7 +62,7 @@
 
 - Cue to json `cue.toJSON()`
 - Cue to js object `cue.parse()`
-- Highly optimized - 2.1MB gzipped bundle size when using "slim" variant
+- Highly optimized - 2.1MB gzipped bundle size when using "slim" variant, 4.2MB for "full"
 
 ## 	:toolbox: Getting Started
 
