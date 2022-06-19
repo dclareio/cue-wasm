@@ -1,4 +1,4 @@
-const CUE = require('../dist/cue-wasm.cjs');
+const CUE = require('../dist/cue-wasm-index.cjs');
 
 const cueString1 = `
 test: string

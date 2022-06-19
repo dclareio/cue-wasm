@@ -1,11 +1,11 @@
 {
   "name": "cue-wasm",
-  "version": "0.5.2",
+  "version": "0.5.4",
   "type": "module",
   "source": "lib/index.js",
   "exports": {
-    "require": "./dist/cue-wasm.cjs",
-    "default": "./dist/cue-wasm.modern.js"
+    "require": "./dist/cue-wasm-index.cjs",
+    "default": "./dist/cue-wasm-index.modern.js"
   },
   "main": "./dist/cue-wasm-[name].cjs",
   "module": "./dist/cue-wasm-[name].module.js",
