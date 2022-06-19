@@ -4,10 +4,8 @@ WORKDIR /src
 COPY . /src
 # mod cue to remove single reference to gob and replace with json
 RUN GOOS=js GOARCH=wasm go install
-# replace gob/yaml encodings with json to get cue to compile, doesn't
-# impact our usage
+# remove reference to pkg which is unused and allows us to reduce package size
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg"||g' {} \;
-# RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|yaml|json|g' {} \;
 
 FROM tinygo/tinygo:0.23.0 AS build-go
 
