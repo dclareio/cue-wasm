@@ -11,6 +11,7 @@ FROM tinygo/tinygo:0.23.0 AS build-go
 
 WORKDIR /src
 COPY . /src
+
 # copy over only the exact go files needed to build cuecontext which is all we use
 COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/go.mod /mods/cue/
 COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/go.sum /mods/cue/
@@ -37,8 +38,10 @@ COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/internal/source /mod
 COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/internal/types /mods/cue/internal/types
 COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/internal/attrs.go /mods/cue/internal/attrs.go
 COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/internal/internal.go /mods/cue/internal/internal.go
-RUN ls /mods/cue/cue
+
+# point cue at our slimmed version
 RUN echo 'replace cuelang.org/go => /mods/cue/' >> go.mod
+
 RUN tinygo build -o /src/lib/cue.wasm -target wasm ./main.go
 RUN /src/scripts/inline-wasm.sh
 
