@@ -56,3 +56,29 @@ test('parses list of cue strings to js object', async () => {
   const result = cue.parse([cueString1, cueString2]);
   expect(result).toEqual({ test: "test", hello: "world" });
 });
+
+// Perf tests
+// https://github.com/cue-lang/cue/wiki/Creating-test-or-performance-reproducers
+// TODO: provide slim/full bundles, this doesn't pass with tinygo
+test('parses cue golden file', async () => {
+  const cue = await CUE.init();
+  const result = cue`
+  #A: {
+    a: string
+    // when using tinygo, breaks with: *a | string
+  }
+
+  s: [Name=string]: #A & {
+      a: Name
+  }
+
+  s: bar: _
+
+  foo: [
+      for _, a in s if a.a != _|_ {a},
+  ]
+  `;
+
+  console.log(result)
+  expect(result).toEqual({ s: { bar: { a: 'bar' } }, foo: [ { a: 'bar' } ] });
+});
