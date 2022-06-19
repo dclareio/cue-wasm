@@ -16,6 +16,7 @@ COPY --from=build-go /usr/local/go/misc/wasm/wasm_exec.js /src/lib/
 
 RUN yarn install --frozen-lockfile
 RUN npx microbundle
+RUN find /src/dist/*.map -type f -exec sed -i -e 's|export default \\\".*\\\"|export default \\\"<cue-wasm-redacted>\\\"|' {} \;
 
 FROM scratch
 
