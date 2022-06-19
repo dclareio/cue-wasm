@@ -12,7 +12,7 @@
   "unpkg": "./dist/cue-wasm.umd.js",
   "scripts": {
     "build": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
-    "build:full": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile.full .",
+    "build:tinygo": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile.tinygo .",
     "test": "jest"
   },
   "devDependencies": {
