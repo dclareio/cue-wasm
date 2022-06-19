@@ -9,11 +9,11 @@ import (
 	"cuelang.org/go/cue/cuecontext"
 )
 
-
 func main() {
+	wait := make(chan struct{}, 0)
 	api := js.Global().Get("CueWasmAPI")
 	api.Set("toJSONImpl", js.FuncOf(toJSON))
-	<-make(chan bool)
+	<-wait
 }
 
 func toJSON(this js.Value, args []js.Value) interface{} {

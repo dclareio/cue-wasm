@@ -47,7 +47,6 @@ FROM node:16-alpine AS build-node
 WORKDIR /src
 COPY . /src
 COPY --from=build-go /src/lib/cue.wasm.inline.js /src/lib/
-COPY --from=build-go /usr/local/tinygo/targets/wasm_exec.js /src/lib/
 
 RUN yarn install --frozen-lockfile
 RUN npx microbundle

@@ -1,4 +1,3 @@
 *.wasm
 *.wasm.inline.js
-wasm_exec.js
 node_modules

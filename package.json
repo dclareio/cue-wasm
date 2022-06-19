@@ -12,7 +12,6 @@
   "unpkg": "./dist/cue-wasm.umd.js",
   "scripts": {
     "build": "DOCKER_BUILDKIT=1 docker build -o dist -f Dockerfile .",
-    "dev": "microbundle watch",
     "test": "jest"
   },
   "devDependencies": {
