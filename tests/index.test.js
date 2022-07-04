@@ -10,7 +10,7 @@ hello: string
 hello: "world"
 `;
 
-["slim", "full"].forEach(variant => {
+["full"].forEach(variant => {
   test(`parses cue to js object - ${variant}`, async () => {
     const cue = await CUE.init(variant);
     const result = cue.parse(cueString1);
@@ -83,4 +83,17 @@ hello: "world"
     expect(result).toEqual({ s: { bar: { a: 'bar' } }, foo: [ { a: 'bar' } ] });
   });
 
+  test(`parses cue schema - ${variant}`, async () => {
+    const cue = await CUE.init(variant);
+    const result = cue.schema`
+    #A: {
+      a: string
+    }
+    `;
+
+    expect(result).toEqual({ s: { bar: { a: 'bar' } }, foo: [ { a: 'bar' } ] });
+  });
 })
+
+
+
