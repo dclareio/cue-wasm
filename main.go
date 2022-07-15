@@ -10,7 +10,6 @@ import (
 
 	"cuelang.org/go/cue"
 	"cuelang.org/go/cue/cuecontext"
-	"cuelang.org/go/cue/load"
 	"cuelang.org/go/encoding/openapi"
 )
 
@@ -47,22 +46,31 @@ func toJSON(this js.Value, args []js.Value) interface{} {
 	}
 }
 
-func toJSONSchema(this js.Value, args []js.Value) interface{} {
-	buildInstances := load.Instances([]string{"-"}, &load.Config{
-		Stdin: bytes.NewBufferString(args[0].String()),
-	})
-	insts := cue.Build(buildInstances)
+func genOpenAPI(inst *cue.Instance) ([]byte, error) {
+	b, err := openapi.Gen(inst, nil)
+	if err != nil {
+			return nil, err
+	}
 
-	b, err := openapi.Gen(insts[0], nil)
+	var out bytes.Buffer
+	err = json.Indent(&out, b, "", "   ")
+	if err != nil {
+			return nil, err
+	}
+
+	return out.Bytes(), nil
+}
+
+func toJSONSchema(this js.Value, args []js.Value) interface{} {
+	var r cue.Runtime
+	inst, err := r.Compile("", args[0].String())
 	if err != nil {
 		return map[string]interface{}{
 			"value": "",
 			"error": err,
 		}
 	}
-
-	var out bytes.Buffer
-	err = json.Indent(&out, b, "", "   ")
+	jsonBytes, err := genOpenAPI(inst)
 	if err != nil {
 		return map[string]interface{}{
 			"value": "",
@@ -70,7 +78,52 @@ func toJSONSchema(this js.Value, args []js.Value) interface{} {
 		}
 	}
 	return map[string]interface{}{
-		"value": string(out.Bytes()),
+		"value": string(jsonBytes),
 		"error": nil,
 	}
 }
+
+// package main
+
+// import (
+// 	"bytes"
+// 	"encoding/json"
+// 	"fmt"
+
+// 	"cuelang.org/go/cue"
+// 	// "cuelang.org/go/cue/load"
+// 	"cuelang.org/go/encoding/openapi"
+// )
+
+
+// func genOpenAPI(inst *cue.Instance) ([]byte, error) {
+// 	b, err := openapi.Gen(inst, &openapi.Config{})
+// 	if err != nil {
+// 			return nil, err
+// 	}
+
+// 	var out bytes.Buffer
+// 	err = json.Indent(&out, b, "", "   ")
+// 	if err != nil {
+// 			return nil, err
+// 	}
+
+// 	return out.Bytes(), nil
+// }
+
+// func main() {
+// 	var r cue.Runtime
+// 	inst, err := r.Compile("", `#Test: test: string`)
+// 	if err != nil {
+// 		// t.Fatal(err)
+// 	}
+// 	// fmt.Printf("%#v", inst)
+
+// 	jsonBytes, err := genOpenAPI(inst)
+// 	if err != nil {
+// 		fmt.Printf("%#v", err)
+
+// 		// fmt.Print(string(err))
+// 	}
+// 	fmt.Printf("%s", string(jsonBytes))
+// }

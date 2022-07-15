@@ -1,6 +1,6 @@
 module github.com/dclareio/cue-wasm
 
-go 1.17
+go 1.18
 
 require cuelang.org/go v0.4.3
 

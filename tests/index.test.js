@@ -86,12 +86,43 @@ hello: "world"
   test(`parses cue schema - ${variant}`, async () => {
     const cue = await CUE.init(variant);
     const result = cue.schema`
-    #A: {
-      a: string
+    #Identity: {
+      // first name of the person
+      first: =~ "[A-Z].*"
+      // Last name of the person
+      Last: =~ "[A-Z].*"
+      // Age of the person
+      Age?: number & < 130
     }
     `;
 
-    expect(result).toEqual({ s: { bar: { a: 'bar' } }, foo: [ { a: 'bar' } ] });
+    expect(result).toEqual({
+      Identity: {
+        type: "object",
+        required: [
+          "first",
+          "Last"
+        ],
+        properties: {
+          first: {
+            description: "first name of the person",
+            type: "string",
+            pattern: "[A-Z].*"
+          },
+          Last: {
+            description: "Last name of the person",
+            type: "string",
+            pattern: "[A-Z].*"
+          },
+          Age: {
+            description: "Age of the person",
+            type: "number",
+            maximum: 130,
+            exclusiveMaximum: true
+          }
+        }
+      }
+    });
   });
 })
 
