@@ -10,7 +10,7 @@
   "main": "./dist/cue-wasm-[name].cjs",
   "module": "./dist/cue-wasm-[name].module.js",
   "scripts": {
-    "build": "rm -rf dist/; DOCKER_BUILDKIT=1 sudo nerdctl build -o  type=local,dest=./dist -f Dockerfile .",
+    "build": "sudo buildkitd & sleep 5; rm -rf dist/; DOCKER_BUILDKIT=1 sudo nerdctl build -o  type=local,dest=./dist -f Dockerfile . && sudo chmod 777 dist & wait",
     "test": "jest"
   },
   "devDependencies": {
