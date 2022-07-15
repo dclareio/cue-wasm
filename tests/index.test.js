@@ -10,7 +10,7 @@ hello: string
 hello: "world"
 `;
 
-["full"].forEach(variant => {
+["slim", "full"].forEach(variant => {
   test(`parses cue to js object - ${variant}`, async () => {
     const cue = await CUE.init(variant);
     const result = cue.parse(cueString1);
@@ -95,7 +95,7 @@ hello: "world"
       Age?: number & < 130
     }
     `;
-
+    // TODO: fails with slim version
     expect(result).toEqual({
       Identity: {
         type: "object",

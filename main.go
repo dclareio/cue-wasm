@@ -16,8 +16,8 @@ import (
 func main() {
 	wait := make(chan struct{}, 0)
 	api := js.Global().Get("CueWasmAPI")
-	api.Set("toJSONImpl", js.FuncOf(toJSON))
-	api.Set("toJSONSchemaImpl", js.FuncOf(toJSONSchema))
+	api.Set("_toJSONImpl", js.FuncOf(toJSON))
+	api.Set("_toOpenAPIImpl", js.FuncOf(toOpenAPI))
 	<-wait
 }
 
@@ -61,7 +61,7 @@ func genOpenAPI(inst *cue.Instance) ([]byte, error) {
 	return out.Bytes(), nil
 }
 
-func toJSONSchema(this js.Value, args []js.Value) interface{} {
+func toOpenAPI(this js.Value, args []js.Value) interface{} {
 	var r cue.Runtime
 	inst, err := r.Compile("", args[0].String())
 	if err != nil {
