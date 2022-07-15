@@ -1,14 +1,17 @@
 module github.com/dclareio/cue-wasm
 
-go 1.17
+go 1.18
 
 require cuelang.org/go v0.4.3
 
 require (
 	github.com/cockroachdb/apd/v2 v2.0.1 // indirect
+	github.com/emicklei/proto v1.6.15 // indirect
+	github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b // indirect
 	github.com/google/uuid v1.2.0 // indirect
 	github.com/mpvl/unique v0.0.0-20150818121801-cbe035fff7de // indirect
 	github.com/pkg/errors v0.8.1 // indirect
+	github.com/protocolbuffers/txtpbfmt v0.0.0-20201118171849-f6a6b3f636fc // indirect
 	golang.org/x/exp v0.0.0-20210126221216-84987778548c // indirect
 	golang.org/x/mod v0.3.1-0.20200828183125-ce943fd02449 // indirect
 	golang.org/x/net v0.0.0-20200226121028-0de0cce0169b // indirect

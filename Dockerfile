@@ -5,7 +5,7 @@ COPY . /src
 
 RUN GOOS=js GOARCH=wasm go install
 
-# strip out packages unsupported by tinygo at this time
+# strip out packages not supportable with tinygo at this time
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg/encoding/json"||g' {} \;
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg/encoding/yaml"||g' {} \;
 RUN find /go/pkg/mod/cuelang.org/go@v0.4.3/ -type f -exec sed -i -e 's|_ "cuelang.org/go/pkg/tool.*"||g' {} \;
@@ -39,6 +39,7 @@ FROM node:16-alpine AS build-node
 WORKDIR /src
 COPY . /src
 COPY --from=build-tinygo /src/lib/cue.wasm.inline.js /src/lib/cue.wasm.slim.inline.js
+RUN touch /src/lib/cue.wasm.slim.inline.js
 COPY --from=build-go /src/lib/cue.wasm.inline.js /src/lib/cue.wasm.full.inline.js
 COPY --from=build-go /usr/local/go/misc/wasm/wasm_exec.js /src/lib/wasm_exec.full.cjs
 
