@@ -16,8 +16,12 @@
   "devDependencies": {
     "jest": "^28.1.1",
     "lodash.isstring": "^4.0.1",
+    "memoizee": "^0.4.15",
     "microbundle": "^0.15.0",
     "pako": "^2.0.4",
     "polyfill-crypto.getrandomvalues": "^1.0.0"
+  },
+  "dependencies": {
+    "@openapi-contrib/openapi-schema-to-json-schema": "^3.2.0"
   }
 }

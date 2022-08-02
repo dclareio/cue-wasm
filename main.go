@@ -67,14 +67,14 @@ func toOpenAPI(this js.Value, args []js.Value) interface{} {
 	if err != nil {
 		return map[string]interface{}{
 			"value": "",
-			"error": err,
+			"error": err.Error(),
 		}
 	}
 	jsonBytes, err := genOpenAPI(inst)
 	if err != nil {
 		return map[string]interface{}{
 			"value": "",
-			"error": err,
+			"error": err.Error(),
 		}
 	}
 	return map[string]interface{}{

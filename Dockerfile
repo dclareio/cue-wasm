@@ -22,7 +22,7 @@ COPY --from=preprocess-go /go/pkg/mod/cuelang.org/go@v0.4.3/ /mods/cue/
 
 # point cue at our slimmed version
 RUN echo 'replace cuelang.org/go => /mods/cue/' >> go.mod
-
+ENV GOGC=1000
 RUN tinygo build -o /src/lib/cue.wasm -target wasm ./main.go
 RUN /src/scripts/inline-wasm.sh
 
@@ -30,7 +30,7 @@ FROM docker.io/golang:1.18-alpine AS build-go
 
 WORKDIR /src
 COPY . /src
-
+ENV GOGC=1000
 RUN GOOS=js GOARCH=wasm go build -o /src/lib/cue.wasm
 RUN /src/scripts/inline-wasm.sh
 
