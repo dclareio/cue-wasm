@@ -139,9 +139,9 @@ cue`test: "${"test"}"` // evaluates `test: "test"`
 
 * [x] CUE -> JSON/JS
 * [ ] JSON/JS -> CUE
-* [x] Use [TinyGo](https://tinygo.org/) to slim down wasm further (currently a bit of a hack, but works well!)
+* [x] Use [TinyGo](https://tinygo.org/) to slim down wasm further (currently a bit of a hack, but works for some use cases)
 * [ ] JSONSchema -> CUE
-* [ ] CUE -> JSONSchema
+* [x] CUE -> JSONSchema
 * [ ] Typescripe Types -> CUE
 * [ ] CUE -> Typescripe Types
 * [ ] Protobufs -> CUE
