@@ -108,12 +108,7 @@ Build the library (requires docker)
 ```javascript
 import CUE from 'cue-wasm'
 
-// inititalize the wasm bindings to use cue
-// can optionally pass a variant, by default will load:
-// "full" variant compiled with standard go compiler *default
-// "slim" variant compiled with tinygo compiler (smaller,
-// but with some known limitations, mainly relating to error messages)
-const cue = await CUE.init("full" | "slim");
+const cue = await CUE.init();
 
 // basic API
 cue.parse('hello: "world"')  // returns { hello: "world" }
@@ -138,14 +133,15 @@ cue`test: "${"test"}"` // evaluates `test: "test"`
 ## :compass: Roadmap
 
 * [x] CUE -> JSON/JS
-* [ ] JSON/JS -> CUE
-* [x] Use [TinyGo](https://tinygo.org/) to slim down wasm further (currently a bit of a hack, but works for some use cases)
-* [ ] JSONSchema -> CUE
-* [x] CUE -> JSONSchema
-* [ ] Typescripe Types -> CUE
+* [X] CUE -> OpenAPI
+* [X] CUE -> JSONSchema
+* [X] CUE -> AST
 * [ ] CUE -> Typescripe Types
-* [ ] Protobufs -> CUE
 * [ ] CUE -> Protobufs
+* [ ] JSON/JS -> CUE
+* [ ] JSONSchema -> CUE
+* [ ] Typescripe Types -> CUE
+* [ ] Protobufs -> CUE
 
 <!-- Contributing -->
 <!-- ## :wave: Contributing

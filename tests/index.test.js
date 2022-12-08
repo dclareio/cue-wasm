@@ -10,7 +10,7 @@ hello: string
 hello: "world"
 `;
 
-["slim", "full"].forEach(variant => {
+["full"].forEach(variant => {
   test(`parses cue to js object - ${variant}`, async () => {
     const cue = await CUE.init(variant);
     const result = cue.parse(cueString1);
@@ -81,6 +81,254 @@ hello: "world"
     `;
 
     expect(result).toEqual({ s: { bar: { a: 'bar' } }, foo: [ { a: 'bar' } ] });
+  });
+
+  test(`parses cue to ast - ${variant}`, async () => {
+    const cue = await CUE.init(variant);
+    const result = cue.ast`
+    #A: {
+      a: string
+      // when using tinygo, breaks with: *a | string
+    }
+
+    s: [Name=string]: #A & {
+        a: Name
+    }
+
+    s: bar: _
+
+    foo: [
+        for _, a in s if a.a != _|_ {a},
+    ]
+    `;
+    expect(result).toEqual({
+      "Decls": [
+        {
+          "Attrs": [],
+          "Label": {
+            "Name": "#A",
+            "NamePos": {}
+          },
+          "Optional": {},
+          "Token": 47,
+          "TokenPos": {},
+          "Value": {
+            "Elts": [
+              {
+                "Attrs": [],
+                "Label": {
+                  "Name": "a",
+                  "NamePos": {}
+                },
+                "Optional": {},
+                "Token": 47,
+                "TokenPos": {},
+                "Value": {
+                  "Name": "string",
+                  "NamePos": {}
+                }
+              }
+            ],
+            "Lbrace": {},
+            "Rbrace": {}
+          }
+        },
+        {
+          "Attrs": [],
+          "Label": {
+            "Name": "s",
+            "NamePos": {}
+          },
+          "Optional": {},
+          "Token": 47,
+          "TokenPos": {},
+          "Value": {
+            "Elts": [
+              {
+                "Attrs": [],
+                "Label": {
+                  "Elts": [
+                    {
+                      "Equal": {},
+                      "Expr": {
+                        "Name": "string",
+                        "NamePos": {}
+                      },
+                      "Ident": {
+                        "Name": "Name",
+                        "NamePos": {}
+                      }
+                    }
+                  ],
+                  "Lbrack": {},
+                  "Rbrack": {}
+                },
+                "Optional": {},
+                "Token": 47,
+                "TokenPos": {},
+                "Value": {
+                  "Op": 22,
+                  "OpPos": {},
+                  "X": {
+                    "Name": "#A",
+                    "NamePos": {}
+                  },
+                  "Y": {
+                    "Elts": [
+                      {
+                        "Attrs": [],
+                        "Label": {
+                          "Name": "a",
+                          "NamePos": {}
+                        },
+                        "Optional": {},
+                        "Token": 47,
+                        "TokenPos": {},
+                        "Value": {
+                          "Name": "Name",
+                          "NamePos": {}
+                        }
+                      }
+                    ],
+                    "Lbrace": {},
+                    "Rbrace": {}
+                  }
+                }
+              }
+            ],
+            "Lbrace": {},
+            "Rbrace": {}
+          }
+        },
+        {
+          "Attrs": [],
+          "Label": {
+            "Name": "s",
+            "NamePos": {}
+          },
+          "Optional": {},
+          "Token": 47,
+          "TokenPos": {},
+          "Value": {
+            "Elts": [
+              {
+                "Attrs": [],
+                "Label": {
+                  "Name": "bar",
+                  "NamePos": {}
+                },
+                "Optional": {},
+                "Token": 47,
+                "TokenPos": {},
+                "Value": {
+                  "Name": "_",
+                  "NamePos": {}
+                }
+              }
+            ],
+            "Lbrace": {},
+            "Rbrace": {}
+          }
+        },
+        {
+          "Attrs": [],
+          "Label": {
+            "Name": "foo",
+            "NamePos": {}
+          },
+          "Optional": {},
+          "Token": 47,
+          "TokenPos": {},
+          "Value": {
+            "Elts": [
+              {
+                "Clauses": [
+                  {
+                    "Colon": {},
+                    "For": {},
+                    "In": {},
+                    "Key": {
+                      "Name": "_",
+                      "NamePos": {}
+                    },
+                    "Source": {
+                      "Name": "s",
+                      "NamePos": {}
+                    },
+                    "Value": {
+                      "Name": "a",
+                      "NamePos": {}
+                    }
+                  },
+                  {
+                    "Condition": {
+                      "Op": 32,
+                      "OpPos": {},
+                      "X": {
+                        "Sel": {
+                          "Name": "a",
+                          "NamePos": {}
+                        },
+                        "X": {
+                          "Name": "a",
+                          "NamePos": {}
+                        }
+                      },
+                      "Y": {
+                        "Bottom": {}
+                      }
+                    },
+                    "If": {}
+                  }
+                ],
+                "Value": {
+                  "Elts": [
+                    {
+                      "Expr": {
+                        "Name": "a",
+                        "NamePos": {}
+                      }
+                    }
+                  ],
+                  "Lbrace": {},
+                  "Rbrace": {}
+                }
+              }
+            ],
+            "Lbrack": {},
+            "Rbrack": {}
+          }
+        }
+      ],
+      "Filename": "",
+      "Imports": [],
+      "Unresolved": [
+        {
+          "Name": "string",
+          "NamePos": {}
+        },
+        {
+          "Name": "string",
+          "NamePos": {}
+        },
+        {
+          "Name": "_",
+          "NamePos": {}
+        },
+        {
+          "Name": "string",
+          "NamePos": {}
+        },
+        {
+          "Name": "string",
+          "NamePos": {}
+        },
+        {
+          "Name": "_",
+          "NamePos": {}
+        }
+      ]
+    });
   });
 
   if (variant !== "slim") {
